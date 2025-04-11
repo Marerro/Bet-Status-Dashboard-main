@@ -1,4 +1,16 @@
+import {useAppDispatch, useAppSelector} from "../store/store";
+import {getAllBets, getAllBetsInfo} from "../store/features/betsSlice";
+import { useEffect } from "react";
+
 export const BetStatusDashboard = () => {
+const dispatch = useAppDispatch()
+const bets = useAppSelector(getAllBets);
+
+useEffect(() => {
+    dispatch(getAllBetsInfo());
+}, [dispatch])
+
+console.log(bets);
 
     return (
         <>

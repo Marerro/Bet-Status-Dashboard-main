@@ -1,4 +1,4 @@
-export interface IBetsInfo {
+export interface IAllBetsInfo {
     betId: number;
     userId: number;
     eventName: string;

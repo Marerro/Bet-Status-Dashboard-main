@@ -16,9 +16,9 @@
     "typescript-eslint": "^8.29.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "nodemon": "^3.1.9",
-    "sequelize": "^6.37.7"
+    "nodemon": "^3.1.9"
   }
 }
