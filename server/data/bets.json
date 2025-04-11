@@ -1,0 +1,16 @@
+[
+  {
+    "betId": "1",
+    "userId": "1",
+    "eventName": "Natus Vincere vs fnatic",
+    "amount": 100,
+    "status": "Pending"
+  },
+  {
+    "betId": "2",
+    "userId": "2",
+    "eventName": "Team Vitality vs G2 Esports",
+    "amount": 250,
+    "status": "Won"
+  }
+]
