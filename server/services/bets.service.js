@@ -6,11 +6,14 @@ class betsService {
     return bets;
   }
 
-  async updateBetsById(id) {
+  async updateBetStatusById(id, newStatus) {
     const findBet = bets.find((bet) => bet.betId === id);
     if (!findBet) {
       throw ApiError.NotFound(`Id ${id} Not Found!`);
     }
+
+    findBet.status = newStatus;
+
     return findBet;
   }
 }
