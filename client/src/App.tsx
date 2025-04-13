@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import './App.css'
-import { BetStatusDashboard } from './components/BetStatusDashboard'
+import { BetStatusDashboard } from "./components/BetStatusDashboard";
+import "./index.css";
 
 function App() {
-
   return (
     <>
-    <BetStatusDashboard />
+      <BetStatusDashboard />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

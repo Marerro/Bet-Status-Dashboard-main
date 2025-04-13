@@ -1,16 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import BetsService from "../../services/BetsService";
 import { IAllBetsInfo } from "../../types/bets";
 import { RootState } from "@reduxjs/toolkit/query";
 
 interface IAllBetsState {
   AllBets: IAllBetsInfo[];
+  filter: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: IAllBetsState = {
   AllBets: [],
+  filter: "All",
   status: "idle",
   error: null,
 };
@@ -22,7 +24,7 @@ export const getAllBetsInfo = createAsyncThunk<IAllBetsInfo[], void>(
       const response = await BetsService.getAllBets();
       return response;
     } catch (error) {
-      return thunkAPI.rejectWithValue("Failed to fetch bets");
+      return thunkAPI.rejectWithValue("Failed to fetch bets", error);
     }
   }
 );
@@ -30,7 +32,11 @@ export const getAllBetsInfo = createAsyncThunk<IAllBetsInfo[], void>(
 export const allBetsSlice = createSlice({
   name: "bets",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilter(state, action: PayloadAction<string>) {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllBetsInfo.pending, (state) => {
@@ -46,5 +52,7 @@ export const allBetsSlice = createSlice({
   },
 });
 // selector who reach part of data from redux state
+export const { setFilter } = allBetsSlice.actions;
 export const getAllBets = (state: RootState) => state.bets.AllBets;
 export default allBetsSlice.reducer;
+
