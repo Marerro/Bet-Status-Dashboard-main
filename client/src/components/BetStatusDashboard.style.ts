@@ -93,12 +93,15 @@ export const StatusBadge = styled.span<{ $status: string }>`
 `;
 
 export const StatusSelect = styled.select`
-  padding: 5px 10px;
+  padding: 10px 20px;
+  background-color: #96a29c
+  border: none;
+  border-radius: 8px;
 `;
 
 export const StatusContainer = styled.div`
   width: 70%;
   display: flex;
-  justify-content: end;
+  justify-content: start;
   margin-bottom: 2rem;
 `;

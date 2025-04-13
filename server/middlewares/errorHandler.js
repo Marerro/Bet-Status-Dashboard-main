@@ -1,9 +1,14 @@
-function errorHandler(err, req, res, next) {
-  
-    const status = err.status || 500;
-    const message = err.message || 'Something went wrong';
-  
-    res.status(status).json({ error: message });
+const ApiError = require('./api.errors');
+
+module.exports = function (err, req, res, next) {
+  if(err instanceof ApiError){
+    return res
+    .status(err.status)
+    .json({message: err.message, errors: err.errors})
   }
-  
-  module.exports = errorHandler;
+
+  return res.status(500).json({
+    message: 'Unexpected server error',
+    error: err.message || err
+  });
+}

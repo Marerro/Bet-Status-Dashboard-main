@@ -1,48 +1,48 @@
 [
   {
-    "betId": "#201",
+    "betId": "201",
     "userId": "4",
     "eventName": "Natus Vincere vs Astralis",
     "amount": 150,
     "status": "Pending"
   },
   {
-    "betId": "#202",
+    "betId": "202",
     "userId": "2",
     "eventName": "Team Liquid vs Cloud9",
     "amount": 230,
     "status": "Won"
   },
   {
-    "betId": "#203",
+    "betId": "203",
     "userId": "7",
     "eventName": "Fnatic vs G2 Esports",
     "amount": 180,
     "status": "Lost"
   },
   {
-    "betId": "#204",
+    "betId": "204",
     "userId": "5",
     "eventName": "Team Vitality vs Heroic",
     "amount": 260,
     "status": "Won"
   },
   {
-    "betId": "#205",
+    "betId": "205",
     "userId": "8",
     "eventName": "FaZe Clan vs NRG",
     "amount": 195,
     "status": "Lost"
   },
   {
-    "betId": "#206",
+    "betId": "206",
     "userId": "1",
     "eventName": "ENCE vs OG",
     "amount": 145,
     "status": "Pending"
   },
   {
-    "betId": "#207",
+    "betId": "207",
     "userId": "6",
     "eventName": "100 Thieves vs Evil Geniuses",
     "amount": 220,

@@ -25,7 +25,9 @@ export const BetStatusDashboard = () => {
   const filter = useAppSelector((state) => state.bets.filter);
 
   const filteredBets =
-    filter === "All" ? bets : bets.filter((bet) => bet.status === filter);
+    filter === "All"
+      ? bets
+      : bets.filter((bet: IAllBetsInfo) => bet.status === filter);
 
   useEffect(() => {
     dispatch(getAllBetsInfo());
