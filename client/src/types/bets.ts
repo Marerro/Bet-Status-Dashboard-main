@@ -1,7 +1,7 @@
 export interface IAllBetsInfo {
-    betId: number;
-    userId: number;
-    eventName: string;
-    amount: number;
-    status: string;
+  betId: number;
+  userId: number;
+  eventName: string;
+  amount: number;
+  status: string;
 }

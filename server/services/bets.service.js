@@ -14,7 +14,10 @@ class betsService {
 
     findBet.status = newStatus;
 
-    return findBet;
+    if (newStatus) {
+      console.log("Status changed succesfully!");
+      return findBet;
+    }
   }
 }
 

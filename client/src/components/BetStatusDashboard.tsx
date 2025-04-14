@@ -1,8 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../store/store";
 import {
-  getAllBets,
+  selectAllBets,
   getAllBetsInfo,
   setFilter,
+  updateBetStatus,
+  setBetStatus,
 } from "../store/features/betsSlice";
 import { useEffect } from "react";
 import {
@@ -18,11 +20,19 @@ import {
   StatusContainer,
 } from "./BetStatusDashboard.style";
 import { IAllBetsInfo } from "../types/bets";
+import toast from "react-hot-toast";
 
 export const BetStatusDashboard = () => {
   const dispatch = useAppDispatch();
-  const bets = useAppSelector(getAllBets);
+  const bets = useAppSelector(selectAllBets);
   const filter = useAppSelector((state) => state.bets.filter);
+  const newStatus = useAppSelector((state) => state.bets.newStatus);
+
+  console.log(newStatus);
+
+  useEffect(() => {
+    dispatch(getAllBetsInfo());
+  }, [dispatch]);
 
   const filteredBets =
     filter === "All"
@@ -30,8 +40,10 @@ export const BetStatusDashboard = () => {
       : bets.filter((bet: IAllBetsInfo) => bet.status === filter);
 
   useEffect(() => {
-    dispatch(getAllBetsInfo());
-  }, [dispatch]);
+    if (newStatus) {
+      toast.success("Status updated succesfully");
+    }
+  }, [newStatus]);
 
   return (
     <>
@@ -56,6 +68,7 @@ export const BetStatusDashboard = () => {
               <Th>Event Name</Th>
               <Th>Amount</Th>
               <Th>Status</Th>
+              <Th>Set new status</Th>
             </tr>
           </thead>
           <tbody>
@@ -66,7 +79,37 @@ export const BetStatusDashboard = () => {
                 <Td>{bet.eventName}</Td>
                 <Td>{bet.amount}</Td>
                 <Td>
-                  <StatusBadge $status={bet.status}>{bet.status}</StatusBadge>
+                  <StatusBadge
+                    $status={
+                      newStatus && newStatus.betId === bet.betId
+                        ? newStatus.status
+                        : bet.status
+                    }
+                  >
+                    {newStatus && newStatus.betId === bet.betId
+                      ? newStatus.status
+                      : bet.status}
+                  </StatusBadge>
+                </Td>
+                <Td>
+                  <StatusSelect
+                    value={"Select status"}
+                    onChange={(e) =>
+                      dispatch(
+                        updateBetStatus({
+                          id: bet.betId,
+                          status: e.target.value,
+                        })
+                      )
+                    }
+                  >
+                    <option value="Select status" disabled>
+                      Select status
+                    </option>
+                    <option value="Won">Won</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Lost">Lost</option>
+                  </StatusSelect>
                 </Td>
               </Row>
             ))}
