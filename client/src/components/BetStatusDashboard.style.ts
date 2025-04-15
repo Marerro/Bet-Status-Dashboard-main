@@ -1,13 +1,32 @@
 import styled from "styled-components";
 
+export const MainContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 780px) {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+`;
+
 export const Wrapper = styled.div`
   padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
   font-family: "Arial", sans-serif;
   background-color: #f0f2f5;
+  text-align: center;
+  margin: 0 auto;
+  @media (max-width: 780px) {
+    width: 100%;
+    padding: 1rem;
+  }
+`;
+
+export const TitleParent = styled.div`
+  width: 100%;
+  min-width: 770px;
+  text-align: center;
 `;
 
 export const Title = styled.h1`
@@ -15,12 +34,21 @@ export const Title = styled.h1`
   font-weight: 700;
   margin-bottom: 2.5rem;
   color: #333;
+  width: 100%;
+  text-align: center;
+
+  @media (max-width: 780px) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const Table = styled.table`
-  width: 70%;
   border-collapse: collapse;
   background-color: #f0f2f5;
+
+  @media (max-width: 480px) {
+    table-layout: fixed;
+  }
 `;
 
 export const Th = styled.th`

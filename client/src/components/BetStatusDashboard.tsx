@@ -4,11 +4,12 @@ import {
   getAllBetsInfo,
   setFilter,
   updateBetStatus,
-  setBetStatus,
 } from "../store/features/betsSlice";
 import { useEffect } from "react";
 import {
+  MainContainer,
   Wrapper,
+  TitleParent,
   Title,
   Table,
   Th,
@@ -47,75 +48,80 @@ export const BetStatusDashboard = () => {
 
   return (
     <>
-      <Wrapper>
+      <TitleParent>
         <Title>Bet Status Dashboard</Title>
-        <StatusContainer>
-          <StatusSelect
-            value={filter}
-            onChange={(e) => dispatch(setFilter(e.target.value))}
-          >
-            <option value="All">All</option>
-            <option value="Won">Won</option>
-            <option value="Lost">Lost</option>
-            <option value="Pending">Pending</option>
-          </StatusSelect>
-        </StatusContainer>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Bet ID</Th>
-              <Th>User ID</Th>
-              <Th>Event Name</Th>
-              <Th>Amount</Th>
-              <Th>Status</Th>
-              <Th>Set new status</Th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredBets.map((bet: IAllBetsInfo, index: number) => (
-              <Row key={bet.betId} $index={index}>
-                <StatusTd $index={index}>{bet.betId}</StatusTd>
-                <Td>{bet.userId}</Td>
-                <Td>{bet.eventName}</Td>
-                <Td>{bet.amount}</Td>
-                <Td>
-                  <StatusBadge
-                    $status={
-                      newStatus && newStatus.betId === bet.betId
+      </TitleParent>
+      <MainContainer>
+        <Wrapper>
+          <StatusContainer>
+            <StatusSelect
+              value={filter}
+              onChange={(e) => dispatch(setFilter(e.target.value))}
+            >
+              <option value="All">All</option>
+              <option value="Won">Won</option>
+              <option value="Lost">Lost</option>
+              <option value="Pending">Pending</option>
+            </StatusSelect>
+          </StatusContainer>
+
+          <Table>
+            <thead>
+              <tr>
+                <Th>Bet ID</Th>
+                <Th>User ID</Th>
+                <Th>Event Name</Th>
+                <Th>Amount</Th>
+                <Th>Status</Th>
+                <Th>Set new status</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredBets.map((bet: IAllBetsInfo, index: number) => (
+                <Row key={bet.betId} $index={index}>
+                  <StatusTd $index={index}>{bet.betId}</StatusTd>
+                  <Td>{bet.userId}</Td>
+                  <Td>{bet.eventName}</Td>
+                  <Td>{bet.amount}</Td>
+                  <Td>
+                    <StatusBadge
+                      $status={
+                        newStatus && newStatus.betId === bet.betId
+                          ? newStatus.status
+                          : bet.status
+                      }
+                    >
+                      {newStatus && newStatus.betId === bet.betId
                         ? newStatus.status
-                        : bet.status
-                    }
-                  >
-                    {newStatus && newStatus.betId === bet.betId
-                      ? newStatus.status
-                      : bet.status}
-                  </StatusBadge>
-                </Td>
-                <Td>
-                  <StatusSelect
-                    value={"Select status"}
-                    onChange={(e) =>
-                      dispatch(
-                        updateBetStatus({
-                          id: bet.betId,
-                          status: e.target.value,
-                        })
-                      )
-                    }
-                  >
-                    <option value="Select status" disabled>
-                      Select status
-                    </option>
-                    <option value="Won">Won</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Lost">Lost</option>
-                  </StatusSelect>
-                </Td>
-              </Row>
-            ))}
-          </tbody>
-        </Table>
-      </Wrapper>
+                        : bet.status}
+                    </StatusBadge>
+                  </Td>
+                  <Td>
+                    <StatusSelect
+                      value={"Select status"}
+                      onChange={(e) =>
+                        dispatch(
+                          updateBetStatus({
+                            id: bet.betId,
+                            status: e.target.value,
+                          })
+                        )
+                      }
+                    >
+                      <option value="Select status" disabled>
+                        Select status
+                      </option>
+                      <option value="Won">Won</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Lost">Lost</option>
+                    </StatusSelect>
+                  </Td>
+                </Row>
+              ))}
+            </tbody>
+          </Table>
+        </Wrapper>
+      </MainContainer>
     </>
   );
 };
