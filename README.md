@@ -36,5 +36,4 @@ npm run start
 
 3.I try to keep middle between simplicity and scalability. My endpoints follow REST principles, with clear error message and status code.
 
-4. I would add more filtering and sorting options that user can find quickly what they need(e.g by date or amount) Also when there's larger amount of bet data I would implement pagination with limit 10 items per page this would improve UX by preventing long scrolling - instead they can switch pages.
-
+4.I would add more filtering and sorting options that user can find quickly what they need(e.g by date or amount) Also when there's larger amount of bet data I would implement pagination with limit 10 items per page this would improve UX by preventing long scrolling - instead they can switch pages.
