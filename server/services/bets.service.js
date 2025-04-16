@@ -1,5 +1,5 @@
 const bets = require("../data/bets.json");
-const ApiError = require("../middlewares/api.errors");
+const ApiError = require("../exceptions/api.errors");
 
 class betsService {
   async getAllBets() {
@@ -15,7 +15,6 @@ class betsService {
     findBet.status = newStatus;
 
     if (newStatus) {
-      console.log("Status changed succesfully!");
       return findBet;
     }
   }

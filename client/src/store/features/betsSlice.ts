@@ -1,12 +1,7 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  PayloadAction,
-  isRejectedWithValue,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import BetsService from "../../services/BetsService";
 import { IAllBetsInfo } from "../../types/bets";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "../../store/store";
 
 interface IAllBetsState {
   bets: IAllBetsInfo[];
@@ -24,26 +19,30 @@ const initialState: IAllBetsState = {
   error: null,
 };
 
-export const getAllBetsInfo = createAsyncThunk<IAllBetsInfo[], void>(
-  "bets/getAllBets",
-  async (_: void, thunkAPI: any) => {
-    try {
-      const response = await BetsService.getAllBets();
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue("Failed to fetch bets", error);
-    }
+export const getAllBetsInfo = createAsyncThunk<
+  IAllBetsInfo[],
+  void,
+  { rejectValue: string }
+>("bets/getAllBets", async (_, thunkAPI) => {
+  try {
+    const response = await BetsService.getAllBets();
+    return response;
+  } catch (error) {
+    if (error instanceof Error) return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue("Failed to fetch bets");
   }
-);
+});
 
 export const updateBetStatus = createAsyncThunk<
   IAllBetsInfo,
-  { id: number; status: string }
+  { id: number; status: string },
+  { rejectValue: string }
 >("bets/updateStatus", async ({ id, status }, { rejectWithValue }) => {
   try {
     const response = await BetsService.updateStatusById(id, status);
     return response;
-  } catch (err) {
+  } catch (error) {
+    if (error instanceof Error) return rejectWithValue(error.message);
     return rejectWithValue("Failed to update status");
   }
 });

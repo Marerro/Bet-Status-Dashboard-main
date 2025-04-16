@@ -39,6 +39,7 @@ export const Title = styled.h1`
 
   @media (max-width: 780px) {
     font-size: 1.4rem;
+    font-weight: 700;
   }
 `;
 
@@ -75,24 +76,20 @@ export const Td = styled.td`
   border-bottom: 1px solid #ddd;
 `;
 
-export const StatusTd = styled.td<{ $status: string }>`
+export const StatusTd = styled.td`
   padding: 14px 24px;
   color: #222;
   font-size: 14px;
-  border-left: 4px solid
-    ${({ $status }) =>
-      $status === "Won"
-        ? "#34c38f"
-        : $status === "Lost"
-        ? "#e4606d"
-        : $status === "Pending"
-        ? "#f0ad4e"
-        : "#adb5bd"};
+  border-left: 4px solid #adb5bd;
   border-bottom: 1px solid #ddd;
 `;
 
 export const Row = styled.tr`
   background-color: #ffffff;
+
+  &:nth-child(even) {
+    background-color: #f8f9fa;
+  }
 
   &:hover {
     background-color: #f1f3f5;

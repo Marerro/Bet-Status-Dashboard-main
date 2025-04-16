@@ -1,8 +1,8 @@
 import $api from "../api/axios";
-import { IAllBetsInfo, IBetStatusUpdate } from "../types/bets";
+import { IAllBetsInfo } from "../types/bets";
 
 export default class BetsService {
-  static async getAllBets(): Promise<IAllBetsInfo> {
+  static async getAllBets(): Promise<IAllBetsInfo[]> {
     const response = await $api.get("/bets");
     return response.data;
   }
@@ -10,7 +10,7 @@ export default class BetsService {
   static async updateStatusById(
     id: number,
     status: string
-  ): Promise<IBetStatusUpdate> {
+  ): Promise<IAllBetsInfo> {
     const response = await $api.patch(`/bets/${id}`, { status });
     return response.data;
   }

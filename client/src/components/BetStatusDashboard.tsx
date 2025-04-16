@@ -29,8 +29,6 @@ export const BetStatusDashboard = () => {
   const filter = useAppSelector((state) => state.bets.filter);
   const newStatus = useAppSelector((state) => state.bets.newStatus);
 
-  console.log(newStatus);
-
   useEffect(() => {
     dispatch(getAllBetsInfo());
   }, [dispatch]);
@@ -77,9 +75,9 @@ export const BetStatusDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredBets.map((bet: IAllBetsInfo, index: number) => (
-                <Row key={bet.betId} $index={index}>
-                  <StatusTd $index={index}>{bet.betId}</StatusTd>
+              {filteredBets.map((bet: IAllBetsInfo) => (
+                <Row key={bet.betId}>
+                  <StatusTd>{bet.betId}</StatusTd>
                   <Td>{bet.userId}</Td>
                   <Td>{bet.eventName}</Td>
                   <Td>{bet.amount}</Td>
